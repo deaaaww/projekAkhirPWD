@@ -1,0 +1,36 @@
+.body{
+  font-family: 'poppins', 'sans-serif';
+}
+
+.hero-image {
+  background-image: url(tumbnail.jpg); 
+  min-height: 100vh; /* ganti ini */
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  margin-bottom: 50px;
+}
+
+.hero-text {
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+    transform: translate(-50%, -50%);
+  color: white;
+}
+
+.kolom-makanan{
+  text-align: start;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.kolom-gambar img {
+  width: 100%;
+  height: auto;
+  margin-top: 15px;
+  margin-bottom: 60px;
+  margin-left: 30px; /* ini yang bikin geser ke kanan */
+  border-radius: 10px;
+}
