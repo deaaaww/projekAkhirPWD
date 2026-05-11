@@ -365,7 +365,7 @@ padding-right: 60px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
-/* HEADER */
+
 .card-header {
   background: none;
   border-bottom: none;
@@ -382,7 +382,6 @@ padding-right: 60px;
   color: #777;
 }
 
-/* ==== INPUT ==== */
 .form-control {
   border-radius: 10px;
   padding: 12px;
@@ -395,7 +394,7 @@ padding-right: 60px;
   box-shadow: 0 0 0 2px rgba(106,80,10,0.15);
 }
 
-/* ==== BUTTON ==== */
+
 .btn-success {
   background-color: #6a500a;
   border: none;
