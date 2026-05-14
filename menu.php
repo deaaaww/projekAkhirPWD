@@ -1,24 +1,43 @@
+<?php
+include 'koneksi.php';
+
+$menu = mysqli_query($koneksi, "SELECT * FROM menu");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promo</title>
+    <title>Menu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="ubah.css">
+    <style>
+
+        .card-menu {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .card img{
+            height: 300px;
+            object-fit: cover;
+        }
+
+    </style>
+
 </head>
 <body>
-     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #6a500a;">
+<nav class="navbar navbar-expand-lg navbar-dark position-relative py-3" style="background-color: #6a500a;">
         <div class="container-fluid">
-
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-
                 <ul class="navbar-nav">
-
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             Outlets
@@ -30,95 +49,64 @@
                             <li><span class="dropdown-item-text">Svarga Jogja</span></li>
                         </ul>
                     </li>
-
                     <li class="nav-item">
-                        <a class="nav-link active" href="promo.html">Promotions</a>
+                        <a class="nav-link" href="promo.html">Promotions</a>
                     </li>
-
                     <li class="nav-item">
-                        <a class="nav-link" href="event.html">Events</a>
+                        <a class="nav-link" href="events.html">Events</a>
                     </li>
-
                     <li class="nav-item">
                         <a class="nav-link" href="about.html">About</a>
                     </li>
-
                 </ul>
-
-                <div class="mx-auto">
-                    <img src="photo/logo.png" alt="Logo" width="80" class="d-block">
+                <div class="position-absolute start-50 translate-middle-x">
+                    <img src="photo/logo.png" alt="Logo" width="80">
                 </div>
-
                 <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="menu.php">Lihat Menu</a>
+                        <a class="nav-link active" href="menu.php">Lihat Menu</a>
                     </li>
-
                     <li class="nav-item ms-2">
                         <a class="btn btn-outline-light" href="reservasi.html">Reservasi</a>
                     </li>
                 </ul>
-
             </div>
         </div>
     </nav>
-    <section class="proomo">
-  <div class="container text-center py-5">
-        <h1 class="fw-bold" style="color: #4A3B2A;">
-            Promo-Promo Menarik di Svarga!
-        </h1>
-        <p class="text-muted" style="color: #7A6A55;">
-            Rasakan pengalaman kuliner yang lebih istimewa dengan berbagai tawaran menarik di Svarga.
-        </p>
-        <div class="mt-4">
-            <a href="reservasi.html" class="btn btn-warning">Reservasi</a>
-            <a href="menu.php" class="btn btn-outline-warning">Lihat Menu</a>
-        </div>
+<section style="background-color: #ede9df;">
+    <div class="container text-center py-5">
+        <h1 class="fw-bold">Our Menu</h1>
+        <p class="text-muted" style="font-size: 20px;">Jelajahi berbagai hidangan lezat yang kami sajikan</p>
     </div>
-    <section class="card-promo">
-        <div class="card" style="width: 18rem;">
-            <img src="photo/package.jpg" class="card-img-top">
-            <div class="card-body">
-                <p class="card-text">Family Set Package</p>
-                <ul>
-                <li>Mulai dari Rp199.000</li>
-                <li>Menu Sharing</li>
-                <li>Dessert Spesial</li>
-                <li>Reservasi meja nyaman</li>
-            </ul>
-        </div>
-    </div>
-    <div class="card" style="width: 18rem;">
-        <img src="photo/package2.jpg" class="card-img-top">
-        <div class="card-body">
-            <p class="card-text">All You Can Eat Package</p>
-            <ul>
-                <li>Mulai dari Rp130.000</li>
-                <li>Unlimited food</li>
-                <li>Free flow minuman</li>
-                <li>Dessert spesial</li>
-                <li>Durasi 90 Menit</li>
-            </ul>
-        </div>
-    </div>
-    <div class="card" style="width: 18rem;">
-        <img src="photo/package4.jpg" class="card-img-top">
-        <div class="card-body">
-            <p class="card-text">Chef's Special Deal</p>
-            <ul>
-                <li>Menu pilihan chef</li>
-                <li>Harga Spesial terbatas</li>
-            </ul>
-        </div>
-    </div>
-</section>
+    <section class="card-menu">
+
+        <?php if(mysqli_num_rows($menu) > 0){ ?>
+            <?php while($data = mysqli_fetch_assoc($menu)) { ?>
+                <div class="card" style="width: 18rem;">
+                    <img src="<?= $data['foto']; ?>" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <?= $data['nama_menu']; ?> <br>
+                            IDR <?= number_format($data['harga'],0,',','.'); ?>
+                        </p>
+                    </div>
+                </div>
+            <?php } ?>
+        <?php } else { ?>
+            <h3 class="text-center">Menu belum tersedia</h3>
+        <?php } ?>
+    </section>
 </section>
 <footer class="footer">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
                 <h3 class="merk">Svarga</h3>
-                <p> Svarga adalah restoran yang menyajikan cita rasa tradisional Indonesia dengan sentuhan modern, menawarkan pengalaman kuliner yang hangat dan autentik.</p>
+                <p>
+                    Svarga adalah restoran yang menyajikan cita rasa 
+                    tradisional Indonesia dengan sentuhan modern, 
+                    menawarkan pengalaman kuliner yang hangat dan autentik.
+                </p>
             </div>
             <div class="col-md-6">
                 <div class="row">
@@ -136,7 +124,7 @@
                             <li>FAQ</li>
                             <li>Career</li>
                             <li>Contact Us</li>
-                            <li>Membership</li> 
+                            <li>Membership</li>
                         </ul>
                     </div>
                     <div class="col-4">
@@ -156,6 +144,6 @@
         <p>Terms of Service | Policy | Service Level Agreement</p>
     </div>
 </footer>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
